@@ -26,27 +26,31 @@ if (isset($_POST['shipping'])) {
 }
 
 print "<strong>Software Order: </strong><br /><br />";
-?>
-<table border="1">
-    <tr> <th>Software</th>  <th>Cost</th></tr>
-    <tr> <td>Student1</td> <td>10</td> </tr>
-    <tr> <td>Student2</td> <td>20</td> </tr>
-</table><br />
-<?php
-
-if (isset($_POST['softwares[]'])) {
-    print "<strong>Software Order: </strong><br />";
-}
+printSoftwares($_POST['softwaresSelected']);
 
 // THIS IS YOUR STUDENT FUNCTION
-function printSoftwares($input) {
-    print_r($input);
+function printSoftwares($array) {
+    include 'softwares.php'; ?>
+    <table border="1">
+        <tr> <th>Software</th>  <th>Cost</th></tr>
+        <?php
+        for ($x = 0; $x < count($array); $x++) {
+
+            $software = $array[$x];
+            $cost = $softwares[$array[$x]]; ?>
+
+            <tr> <td> <?php echo "$software"; ?> </td>
+            <td> <?php echo "$$cost"; ?> </td> </tr> <?php
+        }
+        ?>
+    </table><br />
+    <?php
 }
 
 if (isset($_POST['specs'])) {
-    print "<strong>Order Specifications: </strong><br />{$_POST["specs"]}";
+    print "<strong>Order Specifications: </strong><br />";
+    echo nl2br($_POST['specs']);
 }
-
 ?>
 </body>
 </html>

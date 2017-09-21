@@ -28,7 +28,7 @@
 
     <!-- Scrollbar for Softwares /--!>
     <p>
-    <select name="softwares[]" multiple="multiple">
+    <select multiple name="softwaresSelected[]">
     <?php
     foreach($softwares as $software => $cost)
         echo '<option value="'.$software.'">'.$software.' ($'.$cost.')</option>';
