@@ -1,0 +1,12 @@
+.header img {
+    float: left;
+    background: #555;
+}
+
+.header h1 {
+    position: relative;
+    top: 16px;
+    left: 10px;
+}
+
+form{ display: inline-block; }
