@@ -1,0 +1,91 @@
+<!-- Research Form with General/Study Data -->
+<!-- by Anna Blendermann-->
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>JavaScript Research Form</title>
+    <link rel="stylesheet" href="research.css" />
+</head>
+
+<body>
+<!-- Research Form -->
+<h2>Research Form</h2>
+
+<form action="researchProcessing.php" method="get">
+
+    <!-- General Information -->
+    <fieldset style="width:580px">
+        <legend><i>General Information</i></legend>
+        First Name: <input type="text" name="firstname" required/>
+        Last Name: <input type="text" name="lastname" required/><br /><br />
+        Phone: <input type="text" name="phoneFirstPart" id="phoneFirstPart" size="3" required/> -
+        <input type="text" name="phoneSecondPart" id="phoneSecondPart" size="3" required/> -
+        <input type="text" name="phoneThirdPart" id="phoneThirdPart" size="4" required/>
+        Email: <input type="email" name="email" size="35" required/><br />
+    </fieldset><br />
+
+    <!-- Research Study Data -->
+    <fieldset style="width:580px">
+        <legend><i>Research Study Data</i></legend><br />
+
+        <!-- Min-Max Menus for Age/Height/Weight -->
+        <fieldset >
+            <legend>Age/Height/Weight</legend>
+            Age: <input type="number" name="age" min="1" max="125">
+            Height: <input type="number" name="heightFeet" min="2" max="7"><em> Feet</em>
+            <input type="number" name="heightInches" min="0" max="11"><em> Pounds</em>
+            Weight: <input type="number" name="weight" min="1" max="600"><em> Pounds</em>
+        </fieldset><br /><br />
+
+        <!-- Checkboxes for Conditions -->
+        <fieldset>
+            <legend>Conditions</legend>
+            <input type="checkbox" name="highBloodPressure" id="highBloodPressure" value="High Blood Pressure">High Blood Pressure
+            <input type="checkbox" name="diabetes" id="diabetes" value="Diabetes">Diabetes
+            <input type="checkbox" name="glaucoma" id="glaucoma" value="Glaucoma">Glaucoma
+            <input type="checkbox" name="asthma" id="asthma" value="Asthma">Asthma
+            <input type="checkbox" name="none" id="none" value="None">None
+        </fieldset><br /><br />
+
+        <!-- Radio Buttons for Time Period -->
+        <fieldset>
+            <legend>Time Period</legend>
+            <input type="radio" name="period" value="Never">Never
+            <input type="radio" name="period" value="Less than a year">Less than a year
+            <input type="radio" name="period" value="One to two years">One to two years
+            <input type="radio" name="period" value="More than two years">More than two years
+        </fieldset><br /><br />
+
+        <!-- Study Information -->
+        <fieldset>
+            <legend>Study Information</legend>Which study are you taking part of?
+            <select name="studyType">
+                <option value="Short Term">Short Term</option>
+                <option value="Long Term" selected="selected">Long Term</option>
+            </select>
+            Assigned Study ID:
+            <input type="text" name="firstFourDigits" id="firstFourDigits" size="4" placeholder="A777" required/> -
+            <input type="text" name="secondFourDigits" id="secondFourDigits" size="4" placeholder="B888" required/>
+        </fieldset><br /><br />
+
+        <!-- Additional Information -->
+        <fieldset>
+            <legend>Additional Information (Comments)</legend>
+            <textarea name="comments" rows="6" cols="60"></textarea>
+        </fieldset><br />
+
+    </fieldset><br />
+
+    <!-- Clear and Submit Buttons -->
+    <fieldset style="width:580px">
+        <input type="reset" name="clearButton" value="Clear" />
+        <input type="submit" id="submitButton" value="Submit" />
+    </fieldset>
+
+</form>
+
+<script src="research.js"></script>
+</body>
+</html>

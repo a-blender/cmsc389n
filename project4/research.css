@@ -1,0 +1,23 @@
+/* Research Form Javascript Validation */
+/* by Anna Blendermann */
+
+h2 {
+    text-decoration: underline;
+    text-shadow: 2px 4px 6px grey;
+}
+
+form {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+}
+
+legend {
+    color: brown;
+    font-weight: bold;
+}
+
+fieldset {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+}
