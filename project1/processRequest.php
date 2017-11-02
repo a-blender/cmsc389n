@@ -11,7 +11,7 @@
 
 if (isset($_POST['lastname'])) {
     print "<strong>Last Name: </strong>{$_POST["lastname"]}, ";
-}
+}?>.,xx"
 
 if (isset($_POST['firstname'])) {
     print "<strong>First Name: </strong>{$_POST["firstname"]}<br /><br />";
