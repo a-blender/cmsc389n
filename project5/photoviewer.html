@@ -1,0 +1,210 @@
+<!-- PhotoViewer Application -->
+<!-- By Anna Blendermann -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PhotoViewer Application</title>
+    <script src="DoubleList.js"></script>
+    <script src="Utility.js"></script>
+</head>
+<body>
+
+<!-- Viewer header -->
+<h1><u>Viewer</u></h1>
+
+<!-- Images (division) -->
+<div id="images">
+    <img src="InitialImage.jpg"><br>
+</div>
+
+<!-- Border Line -->
+<hr><br>
+<!-- Folder, Name, and Numbers -->
+    Photos' Folder: <input type="input" id="folder" value="umcp/"><br><br>
+    Common Name: <input type="input" id="name" value="college"><br><br>
+    Start Photo Number: <input type="input" id="start" value="1">
+    End Photo Number: <input type="input" id="end" value="1"><br><br>
+
+<!-- Slide Show buttons -->
+<input type="submit" id="slideShow" value="Slide Show">
+<input type="submit" id="randomSlideShow" value="Random Slide Show">
+<input type="submit" id="previousSlide" value="Previous Slide">
+<input type="submit" id="nextSlide" value="Next Slide"><br><br>
+
+    <input type="submit" id="autoSlideShow" value="Auto Slide Show">
+    <input type="submit" id="autoRandomSlideShow" value="Auto Random Slide Show">
+    <input type="submit" id="stopAutoShow" value="Stop Auto Show"><br><br>
+
+<!-- Reset button -->
+<input type="submit" id="reset" value="Reset">
+<script>
+
+    /* PhotoViewer constructor */
+    function PhotoViewer(name, description) {
+        Utility.call(this, name, description);
+    }
+
+    /* prototype for the PhotoViewer constructor */
+    PhotoViewer.prototype = new Utility();
+    PhotoViewer.prototype.constructor = PhotoViewer;
+
+    /* getArrayPhotosNames function */
+    PhotoViewer.prototype.getArrayPhotosNames = function() {
+
+        /* get user input for the folder, name, and range of photos */
+        let folder = document.getElementById("folder").value;
+        let name = document.getElementById("name").value;
+        let start = document.getElementById("start").value;
+        let end = document.getElementById("end").value;
+
+        /* create a new circular linked list */
+        let list = new DoubleList(function(n1,n2) {
+            return (n1-n2);
+        });
+        let x;
+
+        /* check for valid start and end ints */
+        if (start > end || isNaN(start) || isNaN(end)) {
+            document.getElementById("images").innerHTML = "Invalid start and end values";
+        }
+        else {
+            /* add range of photos to the linked list */
+            for (x = start; x <= end; x++) {
+                let value = folder + name + x + ".jpg";
+                list.addToEnd(value);
+            }
+        }
+        /* return the new linked list */
+        return list;
+    };
+
+    /* randomize function */
+    PhotoViewer.prototype.randomize = function(list) {
+
+        /* convert linked list to an array */
+        let array = new Array();
+        let current = list.head;
+
+        while (current != list.tail) {
+            array.push(current.data);
+            current = current.next;
+        }
+        array.push(list.tail.data);
+
+        /* get length of the array */
+        let length = array.length;
+
+        // randomize the array
+        while (length > 0) {
+
+            // pick an index and decrease length by 1
+            let index = Math.floor(Math.random() * length);
+            length--;
+
+            // swap the last element with it
+            let temp = array[length];
+            array[length] = array[index];
+            array[index] = temp;
+        }
+        document.getElementById("images").innerHTML += array;
+
+        /* convert array back to a linked list */
+        new_list = new DoubleList(function(n1,n2) {
+            return (n1-n2);
+        });
+        let end = document.getElementById("end").value;
+        let x;
+        for (x = 0; x < end; x++) {
+            new_list.addToEnd(array[x]);
+        }
+
+        /* return the randomized linked list */
+        return new_list;
+    };
+
+    /* call the main function */
+    main();
+
+    /* main function */
+    function main() {
+
+        let pv = new PhotoViewer("PhotoViewer", "Custom viewer that displays photos.");
+        let current = null; /* current photo in the list */
+        let period = 0; /* image display interval */
+
+        let slide = document.getElementById("slideShow");
+        slide.onclick = createSlideShow;
+
+        let random = document.getElementById("randomSlideShow");
+        random.onclick = createRandomSlideShow;
+
+        let previous = document.getElementById("previousSlide");
+        previous.onclick = previousSlide;
+
+        let next = document.getElementById("nextSlide");
+        next.onclick = nextSlide;
+
+        /* createSlideShow function */
+        function createSlideShow() {
+
+            let photos = pv.getArrayPhotosNames();
+            current = photos.head;
+            document.getElementById("images").innerHTML = "<img src=" + current.data
+                + " width=444 length=295 onclick=nextSlide()>"
+        }
+
+        /* createRandomSlideShow function - PENDING */
+        function createRandomSlideShow() {
+
+            let photos = pv.getArrayPhotosNames();
+            let randomPhotos = pv.randomize(photos);
+            current = randomPhotos.head;
+            document.getElementById("images").innerHTML = "<img src=" + current.data
+                + " width=444 length=295 onclick=nextSlide()>";
+        }
+
+        /* previousSlide function */
+        function previousSlide() {
+            current = current.prev;
+            document.getElementById("images").innerHTML = "<img src=" + current.data
+                + " width=444 length=295 onclick=nextSlide()>";
+        }
+
+        /* next Slide function */
+        function nextSlide() {
+            current = current.next;
+            document.getElementById("images").innerHTML = "<img src=" + current.data
+                + " width=444 length=295 onclick=nextSlide()>";
+        }
+
+        /* automatic Slide Show functions */
+        let autoSlide = document.getElementById("autoSlideShow");
+        autoSlide.onclick = function() {
+            createSlideShow();
+            period = setInterval(nextSlide, 1000);
+        };
+
+        let autoRandom = document.getElementById("autoRandomSlideShow");
+        autoRandom.onclick = function() {
+            createRandomSlideShow();
+            period = setInterval(nextSlide, 1000);
+        };
+
+        let autoStop = document.getElementById("stopAutoShow");
+        autoStop.onclick = function() {
+            clearTimeout(period);
+        };
+
+        let reset = document.getElementById("reset");
+        reset.onclick = function() {
+            document.getElementById("folder").value = "umcp/";
+            document.getElementById("name").value = "college";
+            document.getElementById("start").value = "1";
+            document.getElementById("end").value = "1";
+        };
+    }
+</script>
+</body>
+</html>

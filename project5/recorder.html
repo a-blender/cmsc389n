@@ -1,0 +1,145 @@
+<!-- Recorder Application -->
+<!-- By Anna Blendermann -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=UTF-8" />
+    <title>Recorder Application</title>
+    <script src="DoubleList.js"></script>
+    <script src="Utility.js"></script>
+</head>
+
+<body>
+
+<!-- Recorder header -->
+<h1><u>Recorder</u></h1>
+
+<!-- drawing canvas -->
+<canvas id="canvas" width="600" height="300" style="border:1px solid #000000;"></canvas>
+<br><br>
+
+<!-- recording buttons -->
+<input type="submit" id="start" value="Start Recording">
+<input type="submit" id="stop" value="Stop Recording">
+<input type="submit" id="playback" value="Playback">
+<input type="reset" id="clear" value="Clear"><br><br>
+
+<strong>Move the mouse around the canvas above.</strong><br>
+<strong>Press enter to change to erase mode | Press enter again to change to drawing mode</strong><br><br>
+
+<div id="hidden"></div>
+
+<script>
+    "use strict";
+    let color = "blue";
+    let sideLength = 5;
+
+    let recording = false;
+    let list = new DoubleList(function(n1,n2) {
+        return (n1-n2);
+    });
+
+    /* Recorder constructor */
+    function Recorder(name, description, list) {
+        Utility.call(this, name, description);
+        this.list = list;
+    }
+
+    /* prototype for the PhotoViewer constructor */
+    Recorder.prototype = new Recorder();
+    Recorder.prototype.constructor = Recorder;
+
+    Recorder.prototype.start = function () {
+        recording = true;
+    };
+
+    Recorder.prototype.stop = function () {
+        recording = false;
+    };
+
+    Recorder.prototype.playback = function () {
+
+        /* get first mouse position */
+        var current = list.head;
+
+        /* redraw the drawing that was saved */
+            setInterval(function() {
+
+                if (current != list.tail) {
+
+                    var points = current.data.split(",");
+                    draw(points[0], points[1]);
+                    current = current.next;
+                }
+            }, 10);
+    };
+
+    Recorder.prototype.retrieve = function () {
+        return this.list;
+    };
+
+    Recorder.prototype.clear = function () {
+        let context = document.getElementById("canvas").getContext("2d");
+        context.clearRect(0, 0, canvas.width, canvas.height);
+    };
+
+    /* call the main function */
+    main();
+
+    /* main function */
+    function main() {
+
+        let rec = new Recorder("Recorder", "Utility that records drawings", list);
+
+        var start = document.getElementById("start");
+        start.onclick = rec.start;
+
+        var stop = document.getElementById("stop");
+        stop.onclick = rec.stop;
+
+        var play = document.getElementById("playback");
+        play.onclick = rec.playback;
+
+        var clear = document.getElementById("clear");
+        clear.onclick = rec.clear;
+
+        document.onmousemove = processMousePosition;
+        document.onkeypress = changeColor;
+    }
+
+    /* processMousePosition function */
+    function processMousePosition(event) {
+
+
+        /* if recording, add mouse position to linked list */
+        if (recording) {
+            var value = event.pageX + "," + event.pageY;
+            list.addToEnd(value);
+        }
+
+        /* draw color on the canvas */
+        draw(event.pageX, event.pageY);
+    }
+
+    /* changeColor function */
+    function changeColor() {
+        if (color === "blue") {
+            color = "white";
+            sideLength = 500;
+        } else {
+            color = "blue";
+            sideLength = 5;
+        }
+    }
+
+    /* draw function - WRITTEN BY NELSON */
+    function draw(xPos, yPos) {
+        let context = document.getElementById("canvas").getContext("2d");
+
+        context.fillStyle = color;
+        context.fillRect(xPos, yPos, sideLength, sideLength);
+    }
+</script>
+</body>
+</html>
