@@ -1,0 +1,24 @@
+body {
+	text-align: center;
+	font-family: sans-serif;
+}
+
+table {
+	margin: auto;
+	font-family: sans-serif;
+	text-align: center;
+	padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color: black;
+}
+
+th, td {
+    border: 1px solid #B50C0C;
+    text-align: center;
+}
+
+tr:hover {
+	background-color: #FBB13C;
+}
+

@@ -10,4 +10,5 @@ umcp2/
 # ignore grababite web files
 *.png
 *.ico
+*.DS_Store
 ProfilePictures/

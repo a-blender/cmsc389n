@@ -1,0 +1,21 @@
+.buttons {
+	background-color: #FBB13C;
+    border: none;
+    color: black;
+    padding: 12px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}
+
+.back {
+	background-color: #2176AE;
+	border: none;
+    color: #F7FBFF;
+    padding: 12px 55px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+}

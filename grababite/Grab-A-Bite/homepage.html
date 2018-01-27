@@ -1,0 +1,46 @@
+<!-- Grab A Bite Homepage -->
+<!-- Anna Blendermann, Ronnie Davis, Ashley Dear, Hunter Klamut -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Grab A Bite Homepage</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="menu.css"/>
+    <link rel="shortcut icon" href="favicon.ico"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<!-- Grab A Bite home page -->
+<div class="jumbotron text-center">
+    <h1>Welcome to Grab A Bite</h1>
+    <p>Your guide to finding partners who love food.</p>
+</div>
+
+<div class="container">
+    <div class="text-center">
+
+        <!-- User Login section -->
+        <hr><br>
+        <h3>Have you been here before?</h3><br>
+        <form action="login.php" method="POST">
+            Username/Email: <input type="email" name="email"/><br><br>
+            Password: <input type="password" name="password"/><br><br>
+            <input type="submit" name="login" value="Log In" class="buttons"/><br><br>
+        </form>
+        <hr><br>
+
+        <!-- User Signup section -->
+        <h3>Are you a new friend?</h3><br>
+        <form action="signup.php" method="POST">
+            <input type="submit" name="signup" value="Sign Up" class="buttons"/><br><br>
+            <hr>
+        </form>
+    </div>
+</div>
+</body>
+</html>
