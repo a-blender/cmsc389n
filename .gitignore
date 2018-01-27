@@ -1,3 +1,4 @@
-*.git/
-*.idea/
-/examples/
+# ignore grababite web files
+*.png
+*.ico
+ProfilePictures/

@@ -27,10 +27,10 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
 
         /* redirect to review/update pages after login */
         if (isset($_SESSION['review'])) {
-            header("Location: http://localhost/project3/ApplicationSystem/confirm.php");
+            header("Location: confirm.php");
 
         } else if (isset($_SESSION['update'])) {
-            header("Location: http://localhost/project3/ApplicationSystem/update.php");
+            header("Location: update.php");
         }
         // disconnect from database
         $db->disconnectFromDB();
