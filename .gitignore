@@ -1,3 +1,12 @@
+# ignore basic extensions
+*.txt
+*.Rhistory
+.idea/
+
+# ignore project5 image files
+*.jpg
+umcp2/
+
 # ignore grababite web files
 *.png
 *.ico
